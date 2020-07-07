@@ -1,6 +1,6 @@
 <template>
  <div>
-   <v-container fluid>
+   <v-container fluid >
     <v-row>
       <v-col class="d-flex" cols="12" sm="12">
         <v-select
@@ -55,6 +55,9 @@ export default {
         {value: 'CH', text: "Chile"},
         {value: 'MX', text: "Mexico"},
         {value: 'AR', text: "Argentina"},
+        {value: 'COL', text: "Colombia"},
+        {value: 'UR', text: "Uruguay"},
+        {value: 'VE', text: "Venezuela"},
       ]
 
     }
@@ -79,6 +82,15 @@ export default {
            break;
          case 'AR':
            city = 0.089
+           break;
+         case 'COL':
+           city = 4.59
+           break;
+         case 'UR':
+           city = 0.054
+           break;
+         case 'VE':
+           city = 262.82
            break;
      }
      try {
