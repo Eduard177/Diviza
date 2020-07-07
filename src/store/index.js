@@ -13,6 +13,7 @@ export default new Vuex.Store({
     },
     mutations: {
 
+
         mostrarLoading(state, payload) {
             state.loading.titulo = payload.titulo
             state.loading.estado = true

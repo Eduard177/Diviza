@@ -1,5 +1,17 @@
 <template>
  <div>
+   <v-container fluid>
+    <v-row>
+      <v-col class="d-flex" cols="12" sm="12">
+        <v-select
+          v-model="select"
+          :items="country"
+          outlined
+          label="Selecione un pais"
+        ></v-select>
+      </v-col>
+    </v-row>
+   </v-container>
  <v-layout :wrap="true">
    <v-flex xs12>
      <v-card>
@@ -36,6 +48,15 @@ export default {
       minimo: '1984',
       maximo: new Date().toISOString().substr(0,10),
       valor: null,
+      select: '',
+      text: '',
+      country:[
+        {value: 'RD', text: "Republica Dominicana"},
+        {value: 'CH', text: "Chile"},
+        {value: 'MX', text: "Mexico"},
+        {value: 'AR', text: "Argentina"},
+      ]
+
     }
   },
   methods: {
@@ -45,13 +66,28 @@ export default {
 
      let arrayFecha = dia.split(['-']);
      let ddmmyy = dia.split('-').reverse().join('-');
+     let city 
+     switch (this.select) {
+         case 'RD':
+           city = 0.073
+           break;
+         case 'CH':
+           city = 1
+           break;
+         case 'MX':
+           city = 0.028
+           break;
+         case 'AR':
+           city = 0.089
+           break;
+     }
      try {
-
+       
       this.mostrarLoading({titulo:'Accediendo a la información', color:'secondary'})
 
       let datos = await axios.get(`https://mindicador.cl/api/dolar/${ddmmyy}`)
       if(datos.data.serie.length > 0){
-        this.valor = await datos.data.serie[0].valor * 0.07162
+        this.valor = await datos.data.serie[0].valor * city
       }else{
         this.valor = 'Sin resultados'
       }
